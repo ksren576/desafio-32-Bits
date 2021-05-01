@@ -1,9 +1,5 @@
 import Vue from "vue";
 import Router from "vue-router";
-const Inicio = () => import("./views/Inicio");
-const Busquedas = () => import("./views/Busquedas");
-const Ventas = () => import("./views/Ventas");
-const Total = () => import("./views/Total");
 
 Vue.use(Router);
 
@@ -13,22 +9,27 @@ export default new Router({
     {
       path: "/", // Ruta de inicio siempre es /
       name: "inicio",
-      component: Inicio,
+      component: () => import("./views/Inicio"),
     },
     {
       path: "/busquedas",
       name: "busquedas",
-      component: Busquedas,
+      component: () => import("./views/Busquedas"),
     },
     {
       path: "/ventas",
       name: "ventas",
-      component: Ventas,
+      component: () => import("./views/Ventas"),
     },
     {
       path: "/total",
       name: "total",
-      component: Total,
+      component: () => import("./views/Total"),
     },
+    {
+      path: "*",
+      name: "notFound",
+      component: () => import("./views/common/404"),
+    }
   ],
 });

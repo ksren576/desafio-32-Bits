@@ -2,9 +2,7 @@
   <div id="app">
     <Nav />
     <div class="body">
-      <transition name="vista">
-        <router-view></router-view>
-      </transition>
+      <router-view></router-view>
     </div>
   </div>
 </template>
@@ -20,15 +18,6 @@ export default {
 </script>
 
 <style scoped>
-.vista-enter-active,
-.vista-leave-active {
-  transition: opacity 0.3s;
-}
-.vista-enter,
-.vista-leave-to {
-  opacity: 0;
-}
-
 .body {
   margin: 30px 0;
 }

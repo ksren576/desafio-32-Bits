@@ -47,11 +47,50 @@ const store = new Vuex.Store({
       precio: 20000,
       color: "red",
       destacado: true
-    }]
+    }],
+    ventas: []
   },
   getters: {},
-  mutations: {},
-  actions: {}
+  mutations: {
+    vender(state, codigo) {
+      state.listaJuegos = state.listaJuegos.map((juego) => {
+        if (juego.codigo === codigo) {
+          juego.stock -= 1;
+          return juego;
+        }
+        return juego;
+      })
+    },
+    agregarVenta(state, venta) {
+      state.ventas = [
+        ...state.ventas,
+        venta,
+      ];
+    }
+  },
+  actions: {
+    async venderJuego(context, codigo) {
+      return new Promise((res) => {
+        setTimeout(() => {
+          context.commit('vender', codigo);
+          res();
+        }, 2000);
+      });
+    },
+    async registrarVenta(context, codigo) {
+      return new Promise((res) => {
+        setTimeout(() => {
+          const juego = context.state.listaJuegos.find((item) => item.codigo === codigo);
+          context.commit('agregarVenta', {
+            codigo: juego.codigo,
+            nombre: juego.nombre,
+            precio: juego.precio
+          });
+          res();
+        }, 1000);
+      });
+    }
+  }
 });
 
 export default store;
